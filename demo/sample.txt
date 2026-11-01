@@ -1,0 +1,19 @@
+Office 文件在线预览 - TXT 示例
+================================
+
+这是一个纯文本文件预览示例。
+
+特点：
+1. 保留原始换行与空格，按等宽字体展示；
+2. 支持 UTF-8 编码的中文内容；
+3. 代码片段可直接阅读，无需额外解析依赖。
+
+示例代码：
+
+function greet(name) {
+  console.log('Hello, ' + name);
+}
+
+greet('office-preview');
+
+如果需要演示 Markdown 渲染效果，请切换到「Markdown」按钮。
