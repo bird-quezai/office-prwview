@@ -20,7 +20,12 @@ https://bird-quezai.github.io/office-prwview/
 
 # 带鉴权 token 的文件
 ?file=https%3A%2F%2Fexample.com%2Ffiles%2Freport.pdf%3Ftoken%3Dabc123
+
+# 指定解析类型（优先于文件后缀名，可选值：doc/docx/xls/xlsx/ppt/pptx/pdf）
+?file=https%3A%2F%2Fexample.com%2Fdownload%3Fid%3D123&type=pdf
 ```
+
+`type` 参数仅接受上述限定类型（大小写不敏感，可带前导点如 `.pdf`）；传入非法类型时自动回退到文件后缀名解析。
 
 #### 其他页面跳转预览
 
@@ -45,6 +50,31 @@ const docContent = ref('https://example.com/files/report.pdf');
     <FilePreview :docContent="docContent" />
   </div>
 </template>
+```
+
+如需在文件地址无后缀或后缀不准确时指定解析类型，可额外传入 `docType`（可选值同上，非法值自动回退后缀名）：
+
+```vue
+<FilePreview :docContent="docContent" docType="pdf" />
+```
+
+## 构建与发布
+
+项目提供 Makefile，统一使用 pnpm 作为包管理器：
+
+| 命令 | 说明 |
+| --- | --- |
+| `make install` | 安装依赖 |
+| `make dev` | 启动本地开发服务 |
+| `make build` | 构建生产包到 `dist/` |
+| `make preview` | 构建后本地预览产物 |
+| `make deploy` | 构建并发布到 GitHub Pages |
+| `make clean` | 清理 `dist/` |
+
+发布命令与 package.json 的 `gh-deploy` 一致：
+
+```
+pnpm exec gh-pages -d dist -r https://github.com/bird-quezai/office-prwview.git
 ```
 
 ## 支持的文件格式
